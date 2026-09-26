@@ -109,6 +109,19 @@
   .about-portrait-row{display:flex;gap:18px;align-items:center;margin-bottom:16px;flex-wrap:wrap;}
   .btn-linkedin{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-ink);
     padding:10px 16px;border-radius:999px;text-decoration:none;font-weight:700;font-size:0.9rem;}
+  .about-hero{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;margin-bottom:22px;}
+  .about-photo-wrap{position:relative;width:168px;height:168px;margin:6px 0 8px;display:flex;align-items:center;justify-content:center;}
+  .about-photo-wrap::before{content:"";position:absolute;inset:-22px;border-radius:50%;
+    background:radial-gradient(circle,#40634C55 0%,#40634C22 40%,transparent 72%);}
+  .about-photo-wrap::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--accent-hi);opacity:.65;}
+  .about-photo{position:relative;width:168px;height:168px;border-radius:50%;object-fit:cover;
+    border:3px solid var(--surface);box-shadow:0 0 0 1px var(--line-strong);z-index:1;}
+  .about-heading{font-family:var(--font-display);font-size:1.9rem;margin:2px 0 0;font-variation-settings:"wght" 600;}
+  .about-subheading{color:var(--ink-2);max-width:52ch;margin:0;font-size:0.98rem;}
+  .about-chip-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:6px 0 4px;}
+  .about-chip{font-family:var(--font-data);font-size:0.72rem;text-transform:uppercase;letter-spacing:.05em;
+    padding:5px 12px;border-radius:999px;border:1px solid var(--line-strong);color:var(--ink-2);background:var(--surface-2);}
+  .about-closing h3{margin:0 0 6px;font-family:var(--font-display);font-size:1.1rem;}
   footer.disclaimer{border-top:1px solid var(--line);margin-top:24px;padding-top:16px;font-size:0.8rem;color:var(--ink-3);}
   @media (max-width:640px){
     .stat-row,.focus-row,.profile-grid{grid-template-columns:1fr;}
@@ -3468,18 +3481,32 @@ function renderSessions(){
 
 /* ---------------- ABOUT TAB ---------------- */
 function renderAbout(){
+  const chips = ["Primary &amp; Secondary","IGCSE &middot; A-Level &middot; US Diploma","UK &middot; Spain &middot; New Zealand","Students on 4 continents","Teacher training"];
   const html = `
     ${eyebrow("About")}
     <h2 class="panel-title">About Mr. Guevara</h2>
     <p class="panel-sub">The teacher behind this dashboard.</p>
+    <div class="card about-hero">
+      ${eyebrow("The teacher behind this dashboard")}
+      <div class="about-photo-wrap">
+        <img class="about-photo" src="https://educadug.github.io/discovery-lab/about/diego.jpg?v=2" alt="Diego Urrutia Guevara" loading="lazy">
+      </div>
+      <h3 class="about-heading">Diego Urrutia Guevara</h3>
+      <p class="about-subheading">Studied in Norway, Spain and New Zealand. Taught in the UK, Spain and New Zealand. Now teaching students across four continents.</p>
+      <div class="about-chip-row">${chips.map(c => `<span class="about-chip">${c}</span>`).join("")}</div>
+      <a class="btn-linkedin" href="${esc(LINKEDIN_URL)}" target="_blank" rel="noopener noreferrer">Connect on LinkedIn</a>
+    </div>
     <div class="card">
-      <p class="strong-open"><strong>Diego's classroom has never had one nationality in it. He studied in Norway, Spain and New Zealand, taught in both private and state schools in the United Kingdom and Spain, and now teaches from New Zealand to students in Europe, the United States, Japan, China, Southeast Asia and Australia.</strong></p>
+      <h3>About Diego</h3>
+      <p>Diego's classroom has never had one nationality in it. He studied in Norway, Spain and New Zealand, taught in both private and state schools in the United Kingdom and Spain, and now teaches from New Zealand to students in Europe, the United States, Japan, China, Southeast Asia and Australia.</p>
       <p>That range is not a travel list — it is the substance of how he teaches. Students arrive from different school systems, different languages and very different ideas of what a good answer looks like. Teaching all of them well means building lessons around thinking rather than around the habits of any single curriculum.</p>
       <p>Before and alongside education, Diego worked in international consultancy and biodiversity. He believes students learn best when knowledge is connected to real problems, investigation, decision-making and the world beyond the classroom.</p>
-      <p>He teaches with Crimson Global Academy and Crimson Education, and works privately with students alongside that — from primary science and Spanish through to IGCSE and A-Level Biology, across both the British and US Diploma pathways.</p>
-      <p>He also trains and coaches teachers: onboarding, instructional quality and enrichment across the Primary Programme. Designing learning for adults as well as for students is where he is now focused on growing his work.</p>
       <p>Running through all of it is a particular interest in the thoughtful use of technology and AI in education. Discovery Lab is where that becomes something you can click: simulations and investigations where students experiment, decide, test ideas and learn by doing.</p>
-      <a class="btn-linkedin" href="${esc(LINKEDIN_URL)}" target="_blank" rel="noopener noreferrer">Connect on LinkedIn</a>
+    </div>
+    <div class="card about-closing">
+      <h3>Full background and experience</h3>
+      <p>Qualifications, teaching history and professional work are all on LinkedIn. Connect there, or get in touch.</p>
+      <a class="btn-linkedin" href="${esc(LINKEDIN_URL)}" target="_blank" rel="noopener noreferrer">View LinkedIn profile</a>
     </div>
   `;
   document.getElementById('tab-about').innerHTML = html + footerHtml();
